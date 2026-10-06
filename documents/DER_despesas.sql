@@ -1,7 +1,3 @@
-CREATE TABLE Entity3 (
-);
-
-
 CREATE TABLE tb_usuarios (
  login VARCHAR(50) NOT NULL,
  senha VARCHAR(200)
