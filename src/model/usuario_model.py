@@ -7,27 +7,45 @@ class Usuario:
 
     @staticmethod
     def cadastrar(login:str, senha:str) -> bool:
-        con, cur = Conexao().conectar()
-
-        if not con:
+        conexao, cursor = Conexao().conectar()
+        if not conexao:
             print("Erro ao tentar conectar")
             return False
 
         try:
-            cur.execute("""
+            cursor.execute("""
                         INSERT INTO tb_usuarios(login, senha)
                         VALUES (%s, %s)
                         """,
                         [login, senha])
-            con.commit()
-            con.close()
+            conexao.commit()
+            conexao.close()
 
             return True
 
         except Exception as e:
             print(f"deu erro aqui: {e}")
             return False
-
+    
     @staticmethod
     def verificar(login:str, senha:str) -> dict:
-        
+        conexao, cursor = Conexao().conectar()
+        if not conexao:
+            print("erro ao verificar")
+            return None
+
+        try:
+            cursor.execute('''
+                        select login, senha from tb_usuarios
+                        where login = %s
+                        and senha = %s;
+                        ''',
+                        [login, senha])
+            resultado = cursor.fetchone()
+            conexao.close()
+
+            return resultado
+
+        except Exception as e:
+            print(f"deu erro aqui: {e}")
+            return {}
