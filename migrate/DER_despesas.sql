@@ -31,5 +31,3 @@ ALTER TABLE tb_categorias ADD CONSTRAINT FK_tb_categorias_0 FOREIGN KEY (login) 
 
 ALTER TABLE tb_despesas ADD CONSTRAINT FK_tb_despesas_0 FOREIGN KEY (id_categoria) REFERENCES tb_categorias (id_categoria);
 ALTER TABLE tb_despesas ADD CONSTRAINT FK_tb_despesas_1 FOREIGN KEY (login) REFERENCES tb_usuarios (login);
-
-
