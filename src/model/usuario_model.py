@@ -9,7 +9,11 @@ class Usuario:
     def cadastrar(login:str, senha:str) -> bool:
         con, cur = Conexao().conectar()
         cur.execute("""
-INSERT INTO tb_usuarios(login, senha)
-VALUES (%s, %s)
-""",
-[login, senha])
+                    INSERT INTO tb_usuarios(login, senha)
+                    VALUES (%s, %s)
+                    """,
+                    [login, senha])
+        con.commit()
+        con.close()
+
+        return True
