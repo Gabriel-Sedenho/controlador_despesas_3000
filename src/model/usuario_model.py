@@ -1,5 +1,4 @@
 from src.database.conexao import Conexao
-import mysql.connector
 
 class Usuario:
     def __init__(self):
