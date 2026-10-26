@@ -29,6 +29,7 @@ class Categoria:
             print(f"deu erro aqui: {e}")
             return None
 
+    @staticmethod
     def excluir(id_categoria:int) -> bool:
         conexao, cursor = Conexao().conectar()
         if not conexao:
@@ -49,7 +50,7 @@ class Categoria:
             print(f"deu erro aqui: {e}")
             return False
 
-
+    @staticmethod
     def recuperar_todos(login:str) -> list[dict]:
         conexao, cursor = Conexao().conectar()
         if not conexao:
