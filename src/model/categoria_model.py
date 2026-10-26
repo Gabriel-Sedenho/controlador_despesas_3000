@@ -1,8 +1,3 @@
-# a classe será chamada Categoria e terá três métodos
-# adicionar, que terá um parâmetro chamado categoria(String) e retornará um int e outro chamado login(String) que retornará um int
-# recuperar_todos , que terá um parâmetro chamado login(String) e retornará um List[Dict]
-# excluir, que terá um parâmetro chamado id_categoria(int) e retornará um boolean
-
 from src.database.conexao import Conexao
 
 
