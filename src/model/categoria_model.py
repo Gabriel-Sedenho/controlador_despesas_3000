@@ -60,7 +60,7 @@ class Categoria:
         try:
             cursor.execute("select nome_categoria from tb_categorias where login = %s",
                            [login])
-            resultado = cursor.fetchone()
+            resultado = cursor.fetchall()
             conexao.commit()
             conexao.close()
             return resultado
