@@ -29,18 +29,27 @@ class Categoria:
             conexao.commit()
             conexao.close()
             return id_categoria
-        except:
-            print("erro ao adicionar")
+
+        except Exception as e:
+            print(f"deu erro aqui: {e}")
+            return None
+
+    def excluir(id_categoria) -> bool:
+        conexao, cursor = Conexao().conectar()
+        if not conexao:
+            print("erro ao tentar conectar")
             return None
         
-    def recuperar_todos(login: str) -> list[dict]:
-        conexao, cursor = Conexao().conectar()
-
-        cursor.execute("""
-                        SELECT nome_categoria FROM tb_categorias
-                        """)
-        
-        resultado = cursor.fetchone()
-        conexao.commit()
-        conexao.close()
-        return resultado
+        try:
+            cursor.execute("""
+                            DELETE FROM tb_categoria
+                            WHERE id_categoria = '%s';
+                            """,
+                            [id_categoria])
+            conexao.commit()
+            conexao.close()
+            return True
+    
+        except Exception as e:
+            print(f"deu erro aqui: {e}")
+            return False
