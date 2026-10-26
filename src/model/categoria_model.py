@@ -55,7 +55,7 @@ class Categoria:
             return False
 
 
-    def selecionar_todos(login:str) -> list[dict]:
+    def recuperar_todos(login:str) -> list[dict]:
         conexao, cursor = Conexao().conectar()
         if not conexao:
             print("erro ao tentar conectar")
