@@ -12,4 +12,20 @@ class Despesas:
         pass
 
     def incluir(id_categoria:int, descricao:str, valor:float, data:str) -> int:
-        pass
+        conexao, cursor = Conexao().conectar()
+        if not conexao:
+            print("erro ao conectar")
+            return None
+
+        try:
+            cursor.execute("""
+                            INSERT INTO tb_despesas(id_caegoria, descricao, valor, dt_cadastro)
+                            VALUES (%s, %s, %s,%s)
+                            """, [id_categoria, descricao, valor, data])
+
+            conexao.commit()
+            conexao.close()
+            return id_categoria
+        except Exception as e:
+            print(f"deu erro aqui {e}")
+            return None

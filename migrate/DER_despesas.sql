@@ -22,6 +22,7 @@ CREATE TABLE tb_despesas (
     valor DECIMAL(7,2),
     dt_cadastro DATE,
     id_categoria INT,
+    descricao_despesa VARCHAR(255),
     login VARCHAR(50),
     CONSTRAINT FK_tb_despesas_0 FOREIGN KEY (id_categoria) REFERENCES tb_categorias (id_categoria),
     CONSTRAINT FK_tb_despesas_1 FOREIGN KEY (login) REFERENCES tb_usuarios (login)
