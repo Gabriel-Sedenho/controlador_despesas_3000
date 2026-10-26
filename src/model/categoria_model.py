@@ -51,7 +51,7 @@ class Categoria:
             return False
 
     @staticmethod
-    def recuperar_todos(login:str) -> list[dict]:
+    def recuperar_todos(login:str) -> list:
         conexao, cursor = Conexao().conectar()
         if not conexao:
             print("erro ao tentar conectar")
