@@ -42,7 +42,7 @@ class Categoria:
         
         try:
             cursor.execute("""
-                            DELETE FROM tb_categoria
+                            DELETE FROM tb_categorias
                             WHERE id_categoria = '%s';
                             """,
                             [id_categoria])
