@@ -34,7 +34,7 @@ class Categoria:
             print(f"deu erro aqui: {e}")
             return None
 
-    def excluir(id_categoria) -> bool:
+    def excluir(id_categoria:int) -> bool:
         conexao, cursor = Conexao().conectar()
         if not conexao:
             print("erro ao tentar conectar")
@@ -53,3 +53,22 @@ class Categoria:
         except Exception as e:
             print(f"deu erro aqui: {e}")
             return False
+
+
+    def selecionar_todos(login:str) -> list[dict]:
+        conexao, cursor = Conexao().conectar()
+        if not conexao:
+            print("erro ao tentar conectar")
+            return None
+        
+        try:
+            cursor.execute("select nome_categoria from tb_categorias where login = %s",
+                           [login])
+            resultado = cursor.fetchone()
+            conexao.commit()
+            conexao.close()
+            return resultado
+        
+        except Exception as e:
+            print(f"deu erro aqui: {e}")
+            return None
