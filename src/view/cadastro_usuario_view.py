@@ -27,4 +27,5 @@ class CadastroUsuarioView(ft.View):
     def cadastrar(self):
         usuario = self.login.value
         senha = self.senha.value
-        Usuario().cadastrar(usuario, senha)
+        if Usuario().cadastrar(usuario, senha):
+            msg = ft.SnackBar(content="Deu certo")
