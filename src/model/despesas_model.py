@@ -1,5 +1,5 @@
 # excluir: terá o parâmetro id_despesa (int), e retornará um boolean.
-# alterar: terá os parâmetros id_despesa (int), id_categoria (int), descricao (String), valor (float) e local (String), e retornará um boolean
+# alterar: terá os parâmetros id_despesa (int), id_categoria (int), descricao (String), valor (float) e data (String), e retornará um boolean
 
 from src.database.conexao import Conexao
 
@@ -79,6 +79,33 @@ class Despesas:
                             WHERE id_despesa = '%s';
                             """,
                             [id_despesa])
+            conexao.commit()
+            conexao.close()
+            return True
+    
+        except Exception as e:
+            print(f"deu erro aqui: {e}")
+            return False
+        
+    def alterar(id_despesa:int, login:str, id_categoria:int, data:str, descricao:str, valor:int) -> bool:
+        conexao, cursor = Conexao().conectar()
+        if not conexao:
+            print("erro ao tentar conectar")
+            return None
+
+        try:
+            cursor.execute("""
+                            UPDATE tb_despesas SET
+                                id_categoria = %s,
+                                descricao = %s,
+                                valor = %s,
+                                data = %s
+                            WHERE
+                                id_despesa = %s
+                                AND id_usuario = %s;
+                            """,
+                            [id_categoria, descricao, valor, data, id_despesa, login])
+            
             conexao.commit()
             conexao.close()
             return True
