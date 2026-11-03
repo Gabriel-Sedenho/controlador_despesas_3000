@@ -36,7 +36,7 @@ class Despesas:
             return None
         
         try:
-            cursor.execute("select valor, dt_cadastro, id_categoria, descricao_despesa, from tb_despesas where login = %s",
+            cursor.execute("select valor, dt_cadastro, id_categoria, descricao_despesa from tb_despesas where login = %s",
                            [login])
             resultado = cursor.fetchall()
             conexao.commit()
@@ -87,6 +87,7 @@ class Despesas:
             print(f"deu erro aqui: {e}")
             return False
         
+    @staticmethod    
     def alterar(id_despesa:int, login:str, id_categoria:int, data:str, descricao:str, valor:int) -> bool:
         conexao, cursor = Conexao().conectar()
         if not conexao:
