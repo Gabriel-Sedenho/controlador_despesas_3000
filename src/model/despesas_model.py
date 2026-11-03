@@ -1,4 +1,3 @@
-
 # excluir: terá o parâmetro id_despesa (int), e retornará um boolean.
 # alterar: terá os parâmetros id_despesa (int), id_categoria (int), descricao (String), valor (float) e local (String), e retornará um boolean
 
@@ -8,6 +7,7 @@ class Despesas:
     def __init__(self):
         pass
 
+    @staticmethod
     def incluir(id_categoria:int, descricao:str, valor:float, data:str) -> int:
         conexao, cursor = Conexao().conectar()
         if not conexao:
@@ -27,6 +27,7 @@ class Despesas:
             print(f"deu erro aqui {e}")
             return None
     
+    @staticmethod
     def recuperar_todos(login:str) -> list:
         conexao, cursor = Conexao().conectar()
         if not conexao:
@@ -45,6 +46,7 @@ class Despesas:
             print(f"deu erro aqui: {e}")
             return None
     
+    @staticmethod
     def recuperar_por_categoria(login:str, id_categoria:int) -> list:
         conexao, cursor = Conexao().conectar()
         if not conexao:
