@@ -1,7 +1,4 @@
-# a classe se chamara Despesa e terá 5 métodos
-# incluir: terá os parâmetros id_categoria (int), descricao (String), valor (float) e data (String), e retornará um int.
-# recuperar_todos: terá o parâmetro login (String), e retornará uma List[Dict] (ou lista de dicionários).
-# recuperar_por_categoria: terá os parâmetros login (String) e id_categoria (int), e retornará uma List[Dict] (ou lista de dicionários).
+
 # excluir: terá o parâmetro id_despesa (int), e retornará um boolean.
 # alterar: terá os parâmetros id_despesa (int), id_categoria (int), descricao (String), valor (float) e local (String), e retornará um boolean
 
@@ -48,11 +45,20 @@ class Despesas:
             print(f"deu erro aqui: {e}")
             return None
     
-    def recuperar_por_categoria(login:str, id_categoria:int):
+    def recuperar_por_categoria(login:str, id_categoria:int) -> list:
         conexao, cursor = Conexao().conectar()
         if not conexao:
             print("erro ao tentar conectar")
             return None
 
         try:
-            cursor.execute("select valor")
+            cursor.execute("select valor, dt_cadastro, id_categoria, descricao_despesa, from tb_despesas where login = %s and id_categoria = %s",
+                           [login], [id_categoria])
+            resultado = cursor.fetchall()
+            conexao.commit()
+            conexao.close()
+            return resultado
+        
+        except Exception as e:
+            print(f"deu erro aqui: {e}")
+            return None
