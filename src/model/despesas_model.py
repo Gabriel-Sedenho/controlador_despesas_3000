@@ -16,13 +16,14 @@ class Despesas:
 
         try:
             cursor.execute("""
-                            INSERT INTO tb_despesas(id_caegoria, descricao, valor, dt_cadastro)
+                            INSERT INTO tb_despesas(id_categoria, descricao, valor, dt_cadastro)
                             VALUES (%s, %s, %s,%s)
                             """, [id_categoria, descricao, valor, data])
 
+            id_despesa = cursor.lastrowid
             conexao.commit()
             conexao.close()
-            return id_categoria
+            return id_despesa
         except Exception as e:
             print(f"deu erro aqui {e}")
             return None
