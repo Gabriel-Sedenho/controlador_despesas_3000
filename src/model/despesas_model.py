@@ -8,7 +8,7 @@ class Despesas:
         pass
 
     @staticmethod
-    def incluir(id_categoria:int, descricao:str, valor:float, data:str) -> int:
+    def incluir(id_categoria:int, descricao:str, valor:float, data:str, login:str) -> int:
         conexao, cursor = Conexao().conectar()
         if not conexao:
             print("erro ao conectar")
@@ -16,9 +16,9 @@ class Despesas:
 
         try:
             cursor.execute("""
-                            INSERT INTO tb_despesas(id_categoria, descricao_despesa, valor, dt_cadastro)
-                            VALUES (%s, %s, %s,%s)
-                            """, [id_categoria, descricao, valor, data])
+                            INSERT INTO tb_despesas(id_categoria, descricao_despesa, valor, dt_cadastro, login)
+                            VALUES (%s, %s, %s,%s, %s)
+                            """, [id_categoria, descricao, valor, data, login])
 
             id_despesa = cursor.lastrowid
             conexao.commit()
@@ -36,7 +36,7 @@ class Despesas:
             return None
         
         try:
-            cursor.execute("select valor, dt_cadastro, id_categoria, descricao_despesa from tb_despesas where login = %s",
+            cursor.execute("select * from tb_despesas where login = %s",
                            [login])
             resultado = cursor.fetchall()
             conexao.commit()
@@ -55,8 +55,8 @@ class Despesas:
             return None
 
         try:
-            cursor.execute("select valor, dt_cadastro, id_categoria, descricao_despesa, from tb_despesas where login = %s and id_categoria = %s",
-                           [login], [id_categoria])
+            cursor.execute("select * from tb_despesas where login = %s and id_categoria = %s",
+                           [login, id_categoria])
             resultado = cursor.fetchall()
             conexao.commit()
             conexao.close()
@@ -88,7 +88,7 @@ class Despesas:
             return False
         
     @staticmethod    
-    def alterar(id_despesa:int, login:str, id_categoria:int, data:str, descricao:str, valor:int) -> bool:
+    def alterar(id_categoria:int, descricao:str, valor:int, data:str, id_despesa:int, login:str) -> bool:
         conexao, cursor = Conexao().conectar()
         if not conexao:
             print("erro ao tentar conectar")
@@ -98,12 +98,12 @@ class Despesas:
             cursor.execute("""
                             UPDATE tb_despesas SET
                                 id_categoria = %s,
-                                descricao = %s,
+                                descricao_despesa = %s,
                                 valor = %s,
-                                data = %s
+                                dt_cadastro = %s
                             WHERE
                                 id_despesa = %s
-                                AND id_usuario = %s;
+                                AND login = %s;
                             """,
                             [id_categoria, descricao, valor, data, id_despesa, login])
             
