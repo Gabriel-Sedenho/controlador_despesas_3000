@@ -29,3 +29,22 @@ class Despesas:
         except Exception as e:
             print(f"deu erro aqui {e}")
             return None
+    
+    def recuperar_todos(login:str) -> list:
+        conexao, cursor = Conexao().conectar()
+        if not conexao:
+            print("erro ao tentar conectar")
+            return None
+        
+        try:
+            cursor.execute("select nome_categoria from tb_despesas where login = %s",
+                           [login])
+            resultado = cursor.fetchall()
+            conexao.commit()
+            conexao.close()
+            return resultado
+        
+        except Exception as e:
+            print(f"deu erro aqui: {e}")
+            return None
+    
