@@ -37,7 +37,7 @@ class Despesas:
             return None
         
         try:
-            cursor.execute("select nome_categoria from tb_despesas where login = %s",
+            cursor.execute("select valor dt_cadastro, id_categoria, descricao_despesa, from tb_despesas where login = %s",
                            [login])
             resultado = cursor.fetchall()
             conexao.commit()
@@ -48,3 +48,11 @@ class Despesas:
             print(f"deu erro aqui: {e}")
             return None
     
+    def recuperar_por_categoria(login:str, id_categoria:int):
+        conexao, cursor = Conexao().conectar()
+        if not conexao:
+            print("erro ao tentar conectar")
+            return None
+
+        try:
+            cursor.execute("s")
