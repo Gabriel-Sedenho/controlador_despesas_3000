@@ -1,6 +1,3 @@
-# excluir: terá o parâmetro id_despesa (int), e retornará um boolean.
-# alterar: terá os parâmetros id_despesa (int), id_categoria (int), descricao (String), valor (float) e data (String), e retornará um boolean
-
 from src.database.conexao import Conexao
 
 class Despesas:
