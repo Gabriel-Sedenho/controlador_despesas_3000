@@ -16,7 +16,7 @@ class Despesas:
 
         try:
             cursor.execute("""
-                            INSERT INTO tb_despesas(id_categoria, descricao, valor, dt_cadastro)
+                            INSERT INTO tb_despesas(id_categoria, descricao_despesa, valor, dt_cadastro)
                             VALUES (%s, %s, %s,%s)
                             """, [id_categoria, descricao, valor, data])
 

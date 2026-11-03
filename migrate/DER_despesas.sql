@@ -18,7 +18,7 @@ CREATE TABLE tb_categorias (
 
 -- 3. Despesas
 CREATE TABLE tb_despesas (
-    id_despesa SMALLINT NOT NULL PRIMARY KEY,
+    id_despesa SMALLINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     valor DECIMAL(7,2),
     dt_cadastro DATE,
     id_categoria INT,
