@@ -37,7 +37,7 @@ class Despesas:
             return None
         
         try:
-            cursor.execute("select valor dt_cadastro, id_categoria, descricao_despesa, from tb_despesas where login = %s",
+            cursor.execute("select valor, dt_cadastro, id_categoria, descricao_despesa, from tb_despesas where login = %s",
                            [login])
             resultado = cursor.fetchall()
             conexao.commit()
@@ -55,4 +55,4 @@ class Despesas:
             return None
 
         try:
-            cursor.execute("s")
+            cursor.execute("select valor")
