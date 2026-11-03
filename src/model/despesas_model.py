@@ -65,3 +65,24 @@ class Despesas:
         except Exception as e:
             print(f"deu erro aqui: {e}")
             return None
+        
+    @staticmethod
+    def excluir(id_despesa:int) -> bool:
+        conexao, cursor = Conexao().conectar()
+        if not conexao:
+            print("erro ao tentar conectar")
+            return None
+        
+        try:
+            cursor.execute("""
+                            DELETE FROM tb_despesas
+                            WHERE id_despesa = '%s';
+                            """,
+                            [id_despesa])
+            conexao.commit()
+            conexao.close()
+            return True
+    
+        except Exception as e:
+            print(f"deu erro aqui: {e}")
+            return False

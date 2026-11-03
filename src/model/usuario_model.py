@@ -48,3 +48,4 @@ class Usuario:
         except Exception as e:
             print(f"deu erro aqui: {e}")
             return {}
+
