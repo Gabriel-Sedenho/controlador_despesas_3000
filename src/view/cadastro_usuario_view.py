@@ -31,10 +31,13 @@ class CadastroUsuarioView(ft.View):
     def cadastrar(self):
         usuario = self.login.value
         senha = self.senha.value
-        if Usuario().cadastrar(usuario, senha):
-            self.pagina.show_dialog(ft.SnackBar(ft.Text(value="Deu certo")))
+        if usuario == "" or senha == "":
+            self.pagina.show_dialog(ft.SnackBar(ft.Text(value="Insira seu usuario e senha")))
+
+        elif Usuario().cadastrar(usuario, senha):
+            self.pagina.show_dialog(ft.SnackBar(ft.Text(value="Usuario Cadastrado")))
         else:
-            self.pagina.show_dialog(ft.SnackBar(ft.Text(value="deu errado")))
+            self.pagina.show_dialog(ft.SnackBar(ft.Text(value="Falha ao Cadastrar")))
 
     async def ir_para_login(self):
         await self.pagina.push_route("/login")
