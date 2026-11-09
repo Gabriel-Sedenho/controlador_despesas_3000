@@ -7,22 +7,24 @@ class CadastroUsuarioView(ft.View):
 
         self.pagina = pagina
 
+        self.route = "/cadastro"
+
         self.title = "Controlador Despesas 3000"
-        self.bgcolor = "#ffffff"
+        self.bgcolor = "#CFEEE6"
         self.horizontal_alignment = "center"
         self.vertical_alignment = "center"
         self.width = 800
         self.height = 800
 
-        titulo = ft.Text(value="Criar nova conta")
+        titulo = ft.Text(value="Criar nova conta", color="#0D0E10")
 
-        self.login = ft.TextField(label="Login", border_color="#01B7FF")
+        self.login = ft.TextField(label="Login", border_color="#0D0E10", color="#0D0E10",)
 
-        self.senha = ft.TextField(label="Senha", password=True, can_reveal_password=True, border_color="#01B7FF")
+        self.senha = ft.TextField(label="Senha", password=True, can_reveal_password=True, border_color="#0D0E10", color="#0D0E10")
 
-        botao_cadastro = ft.Button(content="Cadastrar-se", width=250, on_click=self.cadastrar)
+        botao_cadastro = ft.Button(content="Cadastrar-se", width=250, on_click=self.cadastrar, bgcolor="#5FD34A", color="#0D0E10")
 
-        botao_voltar = ft.Button(content="Voltar", width=250)
+        botao_voltar = ft.Button(content="Voltar para login", width=250, bgcolor="#5FD34A", color="#0D0E10")
 
         self.controls = [titulo, self.login, self.senha, botao_cadastro, botao_voltar]
     
