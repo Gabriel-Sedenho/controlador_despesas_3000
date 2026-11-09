@@ -24,17 +24,20 @@ class CadastroUsuarioView(ft.View):
 
         botao_cadastro = ft.Button(content="Cadastrar-se", width=250, on_click=self.cadastrar, bgcolor="#28C39D", color="#CFEEE6")
 
-        botao_voltar = ft.Button(content="Voltar para login", width=250, bgcolor="#28C39D", color="#CFEEE6", on_click=self.ir_para_login)
+        botao_voltar = ft.TextButton(content="já tem uma conta? Entrar", style=ft.ButtonStyle(color="#CFEEE6"), on_click=self.ir_para_login)
 
         self.controls = [titulo, self.login, self.senha, botao_cadastro, botao_voltar]
     
     def cadastrar(self):
         usuario = self.login.value
         senha = self.senha.value
-        if Usuario().cadastrar(usuario, senha):
-            self.pagina.show_dialog(ft.SnackBar(ft.Text(value="Deu certo")))
+        if usuario == "" or senha == "":
+            self.pagina.show_dialog(ft.SnackBar(ft.Text(value="Insira seu usuario e senha")))
+
+        elif Usuario().cadastrar(usuario, senha):
+            self.pagina.show_dialog(ft.SnackBar(ft.Text(value="Usuario Cadastrado")))
         else:
-            self.pagina.show_dialog(ft.SnackBar(ft.Text(value="deu errado")))
+            self.pagina.show_dialog(ft.SnackBar(ft.Text(value="Falha ao Cadastrar")))
 
     async def ir_para_login(self):
         await self.pagina.push_route("/login")
