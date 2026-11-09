@@ -22,6 +22,6 @@ class LoginUsuarioView(ft.View):
 
         self.senha = ft.TextField(label="Senha", label_style=ft.TextStyle(color="#CFEEE6"), password=True, can_reveal_password=True, border_color="#F0FFE3", color="#FFFFFF")
 
-        botao_login = ft.Button(content="Entrar", width=250, bgcolor="#28C39D", color="#CFEEE6")
+        self.botao_login = ft.Button(content="Entrar", width=250, bgcolor="#28C39D", color="#CFEEE6")
 
         self.controls = [titulo, self.login, self.senha, botao_login]
