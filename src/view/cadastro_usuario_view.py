@@ -5,6 +5,8 @@ class CadastroUsuarioView(ft.View):
     def __init__(self, pagina:ft.Page):
         super().__init__()
 
+        self.pagina = pagina
+
         self.title = "Controlador Despesas 3000"
         self.bgcolor = "#ffffff"
         self.horizontal_alignment = "center"
@@ -28,4 +30,6 @@ class CadastroUsuarioView(ft.View):
         usuario = self.login.value
         senha = self.senha.value
         if Usuario().cadastrar(usuario, senha):
-            msg = ft.SnackBar(content="Deu certo")
+            self.pagina.show_dialog(ft.SnackBar(ft.Text(value="Deu certo")))
+        else:
+            self.pagina.show_dialog(ft.SnackBar(ft.Text(value="deu errado")))
