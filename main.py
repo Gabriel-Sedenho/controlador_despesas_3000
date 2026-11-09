@@ -12,7 +12,7 @@ def main(pagina:ft.Page):
         if pagina.route == "/login":
             pagina.views.append(tela_login_usuario)
         elif pagina.route == "/cadastro":
-            pagina.views.appedn(tela_cadastro_usuario)
+            pagina.views.append(tela_cadastro_usuario)
         pagina.update
         
     pagina.on_route_change = roteamento
