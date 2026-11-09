@@ -18,4 +18,10 @@ class InicioView(ft.View):
 
         titulo = ft.Text(value="Tela Inicial", color="#CFEEE6")
 
-        self.controls = [titulo]
+        inserir_despesa = ft.Button(content="Inserir despesa", width=250, bgcolor="#28C39D", color="#CFEEE6")
+        ver_despesas = ft.Button(content="Visualizar suas despesas", width=250, bgcolor="#0F7A62", color="#CFEEE6")
+
+        inserir_categoria = ft.Button(content="Inserir categoria", width=250, bgcolor="#28C39D", color="#CFEEE6")
+        ver_categorias = ft.Button(content="Vizualizar suas categorias", width=250, bgcolor="#0F7A62", color="#CFEEE6")
+
+        self.controls = [titulo, inserir_despesa, ver_despesas, inserir_categoria, ver_categorias]
