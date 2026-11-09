@@ -24,4 +24,4 @@ class LoginUsuarioView(ft.View):
 
         self.botao_login = ft.Button(content="Entrar", width=250, bgcolor="#28C39D", color="#CFEEE6")
 
-        self.controls = [titulo, self.login, self.senha, botao_login]
+        self.controls = [titulo, self.login, self.senha, self.botao_login]
