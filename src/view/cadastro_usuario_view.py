@@ -41,5 +41,5 @@ class CadastroUsuarioView(ft.View):
         else:
             self.pagina.show_dialog(ft.SnackBar(ft.Text(value="Falha ao Cadastrar")))
 
-    async def ir_para_login(self):
-        await self.pagina.push_route("/login")
+    def ir_para_login(self):
+        self.pagina.navigate("/login")

@@ -7,7 +7,7 @@ class CategoriaView:
         super().__init__()
     
         self.pagina = pagina
-        self.route = "/categoriacadastro"
+        self.route = "/categorias"
 
         self.title = "Controlador Despesas 3000"
         self.bgcolor = "#0D0E10"

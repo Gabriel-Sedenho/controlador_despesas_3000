@@ -7,10 +7,6 @@ class InicioView(ft.View):
     def __init__(self, pagina:ft.Page):
         super().__init__()
 
-        async def mudar_cores():  
-            self.bgcolor = "#ffffff"
-            titulo.color = "#000000"
-
         self.pagina = pagina
 
         self.route = "/inicio"
@@ -23,14 +19,9 @@ class InicioView(ft.View):
 
         dados_usuario = self.pagina.session.store.get("usuario_logado")
         username = dados_usuario.get("login")
-        titulo = ft.Text(value=f"Bem vindo {username}", color="#CFEEE6", size=30, font_family="Cascadia Code")
-
-
-
-        botao_modo_claro = ft.Button(content="Mudar pro modo claro", on_click=mudar_cores)
-
+        titulo = ft.Text(value=f"Bem vindo(a) {username}!!!", color="#CFEEE6", size=30, font_family="Cascadia Code")
 
             
 
 
-        self.controls = [titulo, botao_modo_claro]
+        self.controls = [titulo]

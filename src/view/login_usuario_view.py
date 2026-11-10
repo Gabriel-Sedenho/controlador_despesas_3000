@@ -34,13 +34,13 @@ class LoginUsuarioView(ft.View):
         usuario = self.login.value
         senha = self.senha.value
 
-        res = Usuario().verificar(usuario, senha)
+        resultado = Usuario().verificar(usuario, senha)
 
-        if res:
-            self.pagina.session.store.set("usuario_logado", res) 
-            await self.pagina.push_route("/inicio")
+        if resultado:
+            self.pagina.session.store.set("usuario_logado", resultado) 
+            self.pagina.navigate("/inicio")
         else:
             self.pagina.show_dialog(ft.SnackBar(ft.Text(value="Login ou senha incorretos")))
     
     async def ir_para_cadastro(self):
-        await self.pagina.push_route("/cadastro")
+        await self.pagina.navigate("/cadastro")

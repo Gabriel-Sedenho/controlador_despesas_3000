@@ -2,10 +2,10 @@ import flet as ft
 from src.view.cadastro_usuario_view import CadastroUsuarioView
 from src.view.login_usuario_view import LoginUsuarioView
 from src.view.tela_inicial_view import InicioView
-from src.view.categoria_view import CadastroCategoriaView
-from src.view.categoria import CategoriaView
-from src.view.despesa import DespesaView
-from src.view.despesa_view import DespesaMostrarView
+from src.view.cadastrar_categoria_view import CadastroCategoriaView
+from src.view.ver_categorias_view import CategoriaView
+from src.view.despesa import AddDespesaView
+from src.view.add_despesa_view import DespesaMostrarView
 
 def main(pagina:ft.Page):
     def navegacao(e):
@@ -43,25 +43,38 @@ def main(pagina:ft.Page):
                                                     ft.NavigationBarDestination(icon=ft.Icons.TASK_SHARP, label="Despesas por categoria"),
                                                     ft.NavigationBarDestination(icon=ft.Icons.EXIT_TO_APP, label="Sair"),
                                                          ], on_change=navegacao, bgcolor="#0C3B2E", )
-    tela_cadastro_usuario = CadastroUsuarioView(pagina)
-    tela_login_usuario = LoginUsuarioView(pagina)
-    tela_login_usuario.navigation_bar = barra_navegação
-    tela_inicio = InicioView(pagina)
-    cadastro_categoria = CadastroCategoriaView(pagina)
-    categoria = CategoriaView(pagina)
+    
+
+
+    
+
+
     
 
 
     def roteamento(e=None):
         pagina.views.clear()
         if pagina.route == "/login":
+            tela_login_usuario = LoginUsuarioView(pagina)
+            tela_login_usuario.navigation_bar = barra_navegação
             pagina.views.append(tela_login_usuario)
+
         elif pagina.route == "/cadastro":
+            tela_cadastro_usuario = CadastroUsuarioView(pagina)
             pagina.views.append(tela_cadastro_usuario)
+
         elif pagina.route == "/inicio":
+            tela_inicio = InicioView(pagina)
+            tela_inicio.navigation_bar = barra_navegação
             pagina.views.append(tela_inicio)
+
         elif pagina.route == "/categoriacadastro":
+            cadastro_categoria = CadastroCategoriaView(pagina)
             pagina.views.append(cadastro_categoria)
+        elif pagina.route == "/categorias":
+            ver_categorias = CategoriaView(pagina)
+            pagina.views.append(ver_categorias)
+        
         pagina.update
 
         
