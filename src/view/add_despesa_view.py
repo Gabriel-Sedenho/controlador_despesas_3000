@@ -2,11 +2,11 @@ import flet as ft
 
 from src.model.usuario_model import Usuario
 
-class DespesaMostrarView(ft.View):
-    def __init__(self,pg:ft.Page):
+class AddDespesaView(ft.View):
+    def __init__(self,pagina:ft.Page):
         super().__init__()
 
-        self.route = "/despesas"
+        self.route = "/add_despesa"
 
         self.width = 800
         self.height = 600
