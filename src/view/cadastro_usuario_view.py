@@ -16,7 +16,9 @@ class CadastroUsuarioView(ft.View):
         self.width = 800
         self.height = 800
 
-        titulo = ft.Text(value="Criar nova conta", color="#CFEEE6")
+        titulo = ft.Text(value="Bem Vindo ao Controlador de Despesas 3000!!!", color="#F0FFE3", size=30)
+
+        subtitulo = ft.Text(value="Crie uma conta grátis para organizar as suas despesas!", color="#CFEEE6")
 
         self.login = ft.TextField(label="Login", label_style=ft.TextStyle(color="#CFEEE6"), border_color="#CFEEE6", color="#FFFFFF",)
 
@@ -26,7 +28,7 @@ class CadastroUsuarioView(ft.View):
 
         botao_voltar = ft.TextButton(content="já tem uma conta? Entrar", style=ft.ButtonStyle(color="#CFEEE6"), on_click=self.ir_para_login)
 
-        self.controls = [titulo, self.login, self.senha, botao_cadastro, botao_voltar]
+        self.controls = [titulo, subtitulo, self.login, self.senha, botao_cadastro, botao_voltar]
     
     def cadastrar(self):
         usuario = self.login.value
