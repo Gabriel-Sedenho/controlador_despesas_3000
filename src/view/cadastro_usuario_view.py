@@ -22,7 +22,7 @@ class CadastroUsuarioView(ft.View):
 
         self.login = ft.TextField(label="Login", label_style=ft.TextStyle(color="#CFEEE6"), border_color="#CFEEE6", color="#FFFFFF",)
 
-        self.senha = ft.TextField(label="Senha", label_style=ft.TextStyle(color="#CFEEE6"), password=True, can_reveal_password=True, border_color="#CFEEE6", color="FFFFFF")
+        self.senha = ft.TextField(label="Senha", label_style=ft.TextStyle(color="#CFEEE6"), password=True, can_reveal_password=True, border_color="#CFEEE6", color="#FFFFFF")
 
         botao_cadastro = ft.Button(content="Cadastrar-se", width=250, on_click=self.cadastrar, bgcolor="#28C39D", color="#CFEEE6")
 
