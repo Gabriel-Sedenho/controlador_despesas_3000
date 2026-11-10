@@ -2,7 +2,7 @@ import flet as ft
 
 from src.model.usuario_model import Usuario
 
-class DespesaView(ft.View):
+class DespesaMostrarView(ft.View):
     def __init__(self,pg:ft.Page):
         super().__init__()
 

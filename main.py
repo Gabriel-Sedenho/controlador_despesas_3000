@@ -2,14 +2,16 @@ import flet as ft
 from src.view.cadastro_usuario_view import CadastroUsuarioView
 from src.view.login_usuario_view import LoginUsuarioView
 from src.view.tela_inicial_view import InicioView
-from src.view.cadastro_categoria_view import CadastroCategoriaView
+from src.view.categoria_view import CadastroCategoriaView
+from src.view.categoria import CategoriaView
+from src.view.despesa import DespesaView
+from src.view.despesa_view import DespesaMostrarView
 
 def main(pagina:ft.Page):
-
     def navegacao(e):
         item_clicado = e.control.selected_index
         if item_clicado == 0:
-            pagina.navigate("/categoriacadastro")
+            pagina.navigate("/categoriaview")
         if item_clicado ==1:
             pagina.navigate("/categoria")
         if item_clicado ==2:
@@ -18,7 +20,6 @@ def main(pagina:ft.Page):
             pagina.navigate("/despesasview")
         if item_clicado ==4:
             pagina.navigate("/login")
-
 
     # tentando estilizar a barra de navegação de acordo com a paleta de cores da pagina
     pagina.theme = ft.Theme(
@@ -47,6 +48,8 @@ def main(pagina:ft.Page):
     tela_login_usuario.navigation_bar = barra_navegação
     tela_inicio = InicioView(pagina)
     cadastro_categoria = CadastroCategoriaView(pagina)
+    categoria = CategoriaView(pagina)
+    
 
 
     def roteamento(e=None):
@@ -65,7 +68,7 @@ def main(pagina:ft.Page):
     pagina.on_route_change = roteamento
     roteamento()
 
-    pagina.views.append(tela_login_usuario)
+    pagina.navigate("/login")
     
 
 
