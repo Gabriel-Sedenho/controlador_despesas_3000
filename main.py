@@ -3,7 +3,6 @@ from src.view.cadastro_usuario_view import CadastroUsuarioView
 from src.view.login_usuario_view import LoginUsuarioView
 from src.view.tela_inicial_view import InicioView
 
-from src.view.cadastrar_categoria_view import CadastroCategoriaView
 from src.view.ver_categorias_view import CategoriaView
 from src.view.add_despesa_view import AddDespesaView
 from src.view.ver_despesa_view import DespesaMostrarView
@@ -69,14 +68,9 @@ def main(pagina:ft.Page):
             tela_inicio.navigation_bar = barra_navegação
             pagina.views.append(tela_inicio)
 
-        elif pagina.route == "/categoriacadastro":
-            cadastro_categoria = CadastroCategoriaView(pagina)
-            cadastro_categoria.navigation_bar = barra_navegação
-
-            pagina.views.append(cadastro_categoria)
-
         elif pagina.route == "/categorias":
             ver_categorias = CategoriaView(pagina)
+            ver_categorias.navigation_bar = barra_navegação
             pagina.views.append(ver_categorias)
         
         elif pagina.route == "/add_despesa":
