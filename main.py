@@ -4,7 +4,7 @@ from src.view.login_usuario_view import LoginUsuarioView
 from src.view.tela_inicial_view import InicioView
 
 from src.view.ver_categorias_view import CategoriaView
-from src.view.add_despesa_view import AddDespesaView
+from src.view.despesas_categoria_view import DespesaCategoriaView
 from src.view.ver_despesa_view import DespesaMostrarView
 
 def main(pagina:ft.Page):
@@ -17,7 +17,7 @@ def main(pagina:ft.Page):
         if item_clicado ==2:
             pagina.navigate("/despesas")
         if item_clicado ==3:
-            pagina.navigate("/")
+            pagina.navigate("/despesascategoria")
         if item_clicado ==4:
             pagina.navigate("/login")
 
@@ -73,14 +73,15 @@ def main(pagina:ft.Page):
             ver_categorias.navigation_bar = barra_navegação
             pagina.views.append(ver_categorias)
         
-        elif pagina.route == "/add_despesa":
-            add_despesa = AddDespesaView(pagina)
-            add_despesa.navigation_bar = barra_navegação
-            pagina.views.append(add_despesa)
-
         elif pagina.route == "/despesas":
             ver_despesas = DespesaMostrarView(pagina)
+            ver_despesas.navigation_bar = barra_navegação
             pagina.views.append(ver_despesas)
+
+        elif pagina.route == "/despesascategoria":
+            despesa_categoria = DespesaCategoriaView(pagina)
+            despesa_categoria.navigation_bar = barra_navegação
+            pagina.views.append(despesa_categoria)
         
         pagina.update
 
