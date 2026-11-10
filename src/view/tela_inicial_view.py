@@ -15,7 +15,7 @@ class InicioView(ft.View):
         self.width = 800
         self.height = 800
 
-        titulo = ft.Text(value="Tela Inicial", color="#CFEEE6", size=30)
+        titulo = ft.Text(value="Tela Inicial", color="#CFEEE6", size=30, font_family="Cascadia Code")
 
         inserir_despesa = ft.Button(content="Nova despesa", width=150, bgcolor="#28C39D", color="#CFEEE6")
         ver_despesas = ft.Button(content="Ver despesas", width=150, bgcolor="#0F7A62", color="#CFEEE6")
