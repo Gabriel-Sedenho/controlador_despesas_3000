@@ -21,7 +21,7 @@ class InicioView(ft.View):
         self.width = 800
         self.height = 800
 
-        titulo = ft.Text(value="Tela Inicial", color="#CFEEE6", size=30, font_family="Cascadia Code")
+        titulo = ft.Text(value="Principal", color="#CFEEE6", size=30, font_family="Cascadia Code")
 
         botao_modo_claro = ft.Button(content="Mudar pro modo claro", on_click=mudar_cores)
 
