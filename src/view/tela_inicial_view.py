@@ -1,9 +1,15 @@
 import flet as ft
 from src.model.usuario_model import Usuario
+from src.model.categoria_model import Categoria
+from src.model.despesa_model import Despesas
 
 class InicioView(ft.View):
     def __init__(self, pagina:ft.Page):
         super().__init__()
+
+        async def mudar_cores():  
+            self.bgcolor = "#ffffff"
+            titulo.color = "#000000"
 
         self.pagina = pagina
 
@@ -17,12 +23,10 @@ class InicioView(ft.View):
 
         titulo = ft.Text(value="Tela Inicial", color="#CFEEE6", size=30, font_family="Cascadia Code")
 
-        inserir_despesa = ft.Button(content="Nova despesa", width=150, bgcolor="#28C39D", color="#CFEEE6")
-        ver_despesas = ft.Button(content="Ver despesas", width=150, bgcolor="#0F7A62", color="#CFEEE6")
+        botao_modo_claro = ft.Button(content="Mudar pro modo claro", on_click=mudar_cores)
 
-        inserir_categoria = ft.Button(content="Nova categoria", width=150, bgcolor="#28C39D", color="#CFEEE6")
-        ver_categorias = ft.Button(content="Ver categorias", width=150, bgcolor="#0F7A62", color="#CFEEE6")
 
-        linha_botoes = ft.Row(controls=[inserir_categoria, ver_categorias, inserir_despesa, ver_despesas], width=600)
+            
 
-        self.controls = [titulo, linha_botoes]
+
+        self.controls = [titulo, botao_modo_claro]
