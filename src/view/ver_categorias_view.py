@@ -18,8 +18,8 @@ class CategoriaView(ft.View):
         self.vertical_alignment = "top"
         self.horizontal_alignment = "center"
 
-        dados_usuario = pagina.session.store.get("usuario_logado")
-        self.username = dados_usuario.get("login")
+        self.dados_usuario = pagina.session.store.get("usuario_logado")
+        self.username = self.dados_usuario.get("login")
 
         titulo = ft.Text(value="Categorias",
                         color="#CFEEE6",
@@ -69,7 +69,6 @@ class CategoriaView(ft.View):
             self.pagina.update()
 
     def excluir(self):
-        categorias = self.lista_categorias
-        for categoria in categorias:
-            id_categoria = categoria.get("id_categoria")
-            Categoria.excluir(id_categoria)
+        id_categoria = self.username.get("id_categoria")
+
+        resultado = Categoria.excluir(id_categoria)
