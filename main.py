@@ -22,7 +22,7 @@ def main(pagina:ft.Page):
         if item_clicado ==4:
             pagina.navigate("/login")
 
-    # tentando estilizar a barra de navegação de acordo com a paleta de cores da pagina
+    # Estilizando a barra de navegação de acordo com a paleta de cores da pagina
     pagina.theme = ft.Theme(
       navigation_bar_theme=ft.NavigationBarTheme(
         label_text_style={
@@ -57,7 +57,6 @@ def main(pagina:ft.Page):
         pagina.views.clear()
         if pagina.route == "/login":
             tela_login_usuario = LoginUsuarioView(pagina)
-            tela_login_usuario.navigation_bar = barra_navegação
             pagina.views.append(tela_login_usuario)
 
         elif pagina.route == "/cadastro":
