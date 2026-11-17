@@ -69,7 +69,7 @@ class CategoriaView(ft.View):
             self.pagina.update()
 
     def excluir(self):
-        categorias = Categoria.recuperar_todos(self.username)
+        categorias = self.lista_categorias
         for categoria in categorias:
             id_categoria = categoria.get("id_categoria")
             Categoria.excluir(id_categoria)
