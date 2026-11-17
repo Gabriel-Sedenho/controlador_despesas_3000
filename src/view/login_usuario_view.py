@@ -16,7 +16,9 @@ class LoginUsuarioView(ft.View):
         self.width = 800
         self.height = 800
 
-        titulo = ft.Text(value="Acesse sua conta", color="#F0FFE3")
+        titulo = ft.Text(value="Controlador de Despesas 3000!!!", color="#F0FFE3", size=30)
+
+        subtitulo = ft.Text(value="Acesse sua conta para usar o app", color="#F0FFE3")
 
         self.login = ft.TextField(label="Login", label_style=ft.TextStyle(color="#CFEEE6"), border_color="#F0FFE3", color="#FFFFFF",)
 
@@ -26,15 +28,19 @@ class LoginUsuarioView(ft.View):
 
         botao_cadastro = ft.TextButton(content="Não tem uma conta? Cadastre-se aqui!", style=ft.ButtonStyle(color="#CFEEE6"), on_click=self.ir_para_cadastro)
 
-        self.controls = [titulo, self.login, self.senha, botao_entrar, botao_cadastro]
+        self.controls = [titulo, subtitulo, self.login, self.senha, botao_entrar, botao_cadastro]
 
     async def entrar(self):
         usuario = self.login.value
         senha = self.senha.value
-        if Usuario().verificar(usuario, senha):
-            await self.pagina.push_route("/inicio")
+
+        resultado = Usuario().verificar(usuario, senha)
+
+        if resultado:
+            self.pagina.session.store.set("usuario_logado", resultado) 
+            self.pagina.navigate("/inicio")
         else:
             self.pagina.show_dialog(ft.SnackBar(ft.Text(value="Login ou senha incorretos")))
     
     async def ir_para_cadastro(self):
-        await self.pagina.push_route("/cadastro")
+        await self.pagina.navigate("/cadastro")
