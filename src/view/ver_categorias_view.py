@@ -27,7 +27,7 @@ class CategoriaView(ft.View):
         
         self.campo_nova_categoria = ft.TextField(label="Nome da categoria", color="#CFEEE6")
 
-        botao_cadastrar = ft.Button(icon=ft.Icons.ADD, bgcolor="#28C39D", color="#CFEEE6", on_click=self.cadastrar_categoria)
+        botao_cadastrar = ft.Button(icon=ft.Icons.ADD, bgcolor="#28C39D", color="#CFEEE6", on_click=self.cadastrar_categoria, )
 
         linha = ft.Row(controls=[self.campo_nova_categoria, botao_cadastrar], width=400)
         
@@ -35,19 +35,25 @@ class CategoriaView(ft.View):
 
         titulo_categorias = ft.Text(value="Suas categorias", color="#CFEEE6", size=30)
 
+        botao_atualizar = ft.Button(icon=ft.Icons.UPDATE, bgcolor="#28C39D", color="#CFEEE6", on_click=self.atualizar_lista_categorias)
+
         coluna = ft.Column(controls=self.lista_categorias)
 
 
-        self.controls = [titulo, linha, titulo_categorias, coluna]
+        self.controls = [titulo, linha, titulo_categorias, botao_atualizar, coluna]
 
+        
     def cadastrar_categoria(self):
 
         nome = self.campo_nova_categoria.value
 
         resultado = Categoria.adicionar(nome, self.username)
+
         if resultado:
             self.pagina.show_dialog(ft.SnackBar(ft.Text(value="Categoria Cadastrada")))
+            self.lista_categorias.clear()
             self.atualizar_lista_categorias()
+
         else:
             self.pagina.show_dialog(ft.SnackBar(ft.Text(value="Falha ao cadastrar")))
     
@@ -56,7 +62,14 @@ class CategoriaView(ft.View):
 
         for categoria in categorias:
             nome_categoria = categoria.get("nome_categoria")
-            campo = ft.Text(value=nome_categoria, color="#0F7A62") 
-            self.lista_categorias.append(campo)
+            linha = ft.Row(controls=[ft.Text(value=nome_categoria, color="#0F7A62"), ft.Button(icon=ft.Icons.DELETE, bgcolor="#28C39D", color="#CFEEE6", on_click=self.excluir)])
+            
+            self.lista_categorias.append(linha)
 
-            self.pagina.update(),
+            self.pagina.update()
+
+    def excluir(self):
+        categorias = Categoria.recuperar_todos(self.username)
+        for categoria in categorias:
+            id_categoria = categoria.get("id_categoria")
+            Categoria.excluir(id_categoria)
