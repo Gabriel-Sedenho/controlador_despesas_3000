@@ -58,7 +58,7 @@ class Categoria:
             return None
         
         try:
-            cursor.execute("select * from tb_categorias where login = %s",
+            cursor.execute("select nome_categoria from tb_categorias where login = %s",
                            [login])
             resultado = cursor.fetchall()
             conexao.commit()

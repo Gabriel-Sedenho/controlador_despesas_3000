@@ -67,9 +67,3 @@ class CategoriaView(ft.View):
             self.lista_categorias.append(linha)
 
             self.pagina.update()
-
-    def excluir(self):
-        categorias = Categoria.recuperar_todos(self.username)
-        for categoria in categorias:
-            id_categoria = categoria.get("id_categoria")
-            Categoria.excluir(id_categoria)
