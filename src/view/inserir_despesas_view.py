@@ -24,7 +24,9 @@ class DespesaInserirView(ft.View):
 
         opcoes = []
         for categoria in categorias:
-            opcoes.append(ft.DropdownOption(key=categoria.get("id_categoria"), text=categoria.get("nome_categoria")))
+            self.id_categoria = categoria.get("id_categoria")
+            nome_categoria = categoria.get("nome_categoria")
+            opcoes.append(ft.DropdownOption(key=self.id_categoria, text=nome_categoria))
 
         
         ### código da tela ###
@@ -37,17 +39,16 @@ class DespesaInserirView(ft.View):
 
         self.campo_valor = ft.TextField(label="Valor da despesa", color="#CFEEE6", keyboard_type=ft.KeyboardType.NUMBER)
 
-        self.campo_data = ft.TextField(label="data da despesa", color="#CFEEE6", keyboard_type=ft.KeyboardType.DATETIME)
+        self.campo_data = ft.TextField(label="Data da despesa (ANO-MES-DIA)", color="#CFEEE6", keyboard_type=ft.KeyboardType.DATETIME)
 
-        self.campo_categoria = ft.Dropdown(color="#CFEEE6" ,options=
-            opcoes)
+        self.campo_categoria = ft.Dropdown(color="#CFEEE6" ,options=opcoes, width=300)
 
-        botao_cadastrar = ft.Button(icon=ft.Icons.ADD, bgcolor="#28C39D", color="#CFEEE6")
+        botao_cadastrar = ft.Button(icon=ft.Icons.ADD, bgcolor="#28C39D", color="#CFEEE6", on_click=self.adicionar_despesa)
 
 
 
         self.controls = [titulo, self.campo_descricao, self.campo_valor, self.campo_data, self.campo_categoria, botao_cadastrar]
         ### / ####
 
-        # def adicionar_despesa(self):
-        #     Despesas.incluir(, self.campo_descricao.value, self.campo_valor.value)
+    def adicionar_despesa(self):
+        Despesas.incluir(self.id_categoria, self.campo_descricao.value, self.campo_valor.value, self.campo_data.value, self.username)
