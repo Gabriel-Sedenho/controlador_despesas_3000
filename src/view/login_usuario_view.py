@@ -43,4 +43,4 @@ class LoginUsuarioView(ft.View):
             self.pagina.show_dialog(ft.SnackBar(ft.Text(value="Login ou senha incorretos")))
     
     async def ir_para_cadastro(self):
-        await self.pagina.navigate("/cadastro")
+        self.pagina.navigate("/cadastro")
