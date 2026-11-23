@@ -58,17 +58,20 @@ class CategoriaView(ft.View):
             self.pagina.show_dialog(ft.SnackBar(ft.Text(value="Falha ao cadastrar")))
     
     def atualizar_lista_categorias(self):
+        self.lista_categorias.clear()
         categorias = Categoria.recuperar_todos(self.username)
 
         for categoria in categorias:
             nome_categoria = categoria.get("nome_categoria")
-            linha = ft.Row(controls=[ft.Text(value=nome_categoria, color="#0F7A62"), ft.Button(icon=ft.Icons.DELETE, bgcolor="#28C39D", color="#CFEEE6", on_click=self.excluir)])
+            texto = ft.Text(value=nome_categoria, color="#0F7A62")
+            botao = ft.Button(icon=ft.Icons.DELETE, bgcolor="#28C39D", color="#CFEEE6", key=categoria.get("id_categoria"), on_click=self.excluir)
+            linha = ft.Row(controls=[texto, botao])
             
             self.lista_categorias.append(linha)
 
             self.pagina.update()
 
-    def excluir(self):
-        id_categoria = self.username.get("id_categoria")
-
-        resultado = Categoria.excluir(id_categoria)
+    def excluir(self, e):
+        id_categoria = e.control.key
+        Categoria().excluir(id_categoria)
+        self.atualizar_lista_categorias()
