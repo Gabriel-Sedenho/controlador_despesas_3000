@@ -16,7 +16,7 @@ def main(pagina:ft.Page):
         if item_clicado ==1:
             pagina.navigate("/add_despesa")
         if item_clicado ==2:
-            pagina.navigate("/cadastrodespesas")
+            pagina.navigate("/despesas")
         if item_clicado ==3:
             pagina.navigate("/despesascategoria")
         if item_clicado ==4:
@@ -73,7 +73,7 @@ def main(pagina:ft.Page):
             ver_categorias.navigation_bar = barra_navegação
             pagina.views.append(ver_categorias)
         
-        elif pagina.route == "/cadastrodespesas":
+        elif pagina.route == "/despesas":
             ver_despesas = DespesaMostrarView(pagina)
             ver_despesas.navigation_bar = barra_navegação
             pagina.views.append(ver_despesas)
