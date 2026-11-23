@@ -29,18 +29,21 @@ class DespesaMostrarView(ft.View):
         botao_ver_todos = ft.Button(content="ver todas as despesas", on_click=self.atualizar_todas)
 
         coluna = ft.Column(controls=self.lista_despesas)
-        
+
+        tabela = ft.DataTable(columns=[ft.DataColumn(label=)])
 
         self.controls = [titulo, botao_ver_todos, coluna]
 
     def atualizar_todas(self):
+        self.lista_despesas.clear()
         despesas = Despesas.recuperar_todos(self.username)
 
         for despesa in despesas:
-            despesa_mostrada = despesa.get("descricao_despesa, dt_cadastro, valor")
-            texto = ft.Text(value=despesa_mostrada, color="#0F7A62")
+            despesa_mostrada = despesa.get("descricao_despesa")
+            nome_despesa = ft.Text(value=despesa_mostrada, color="#CFEEE6")
+            
             botao = ft.Button(icon=ft.Icons.DELETE, bgcolor="#28C39D", color="#CFEEE6", key=despesa.get("id_despesa"), on_click=self.excluir)
-            linha = ft.Row(controls=[texto, botao])
+            linha = ft.Row(controls=[nome_despesa, botao])
             
             self.lista_despesas.append(linha)
 
@@ -49,6 +52,7 @@ class DespesaMostrarView(ft.View):
         self.pagina.update()
 
     def excluir(self, e):
+        self.lista_despesas.clear()
         id_despesa = e.control.key
         Despesas.excluir(id_despesa)
         self.atualizar_todas
