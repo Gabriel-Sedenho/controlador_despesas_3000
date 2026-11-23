@@ -39,7 +39,10 @@ class DespesaInserirView(ft.View):
 
         self.campo_valor = ft.TextField(label="Valor da despesa", color="#CFEEE6", keyboard_type=ft.KeyboardType.NUMBER)
 
-        self.campo_data = ft.TextField(label="Data da despesa (ANO-MES-DIA)", color="#CFEEE6", keyboard_type=ft.KeyboardType.DATETIME)
+        # Criando um datepicker para não ter que escrever a data
+        self.data = ft.DatePicker()
+        # Botão para ativar o datapicker
+        self.campo_data = ft.Button(icon=ft.Icons.CALENDAR_MONTH, on_click=lambda _:pagina.show_dialog(self.data), bgcolor="#0F7A62", color="#CFEEE6", width=300)
 
         self.campo_categoria = ft.Dropdown(color="#CFEEE6" ,options=opcoes, width=300)
 
@@ -51,4 +54,4 @@ class DespesaInserirView(ft.View):
         ### / ####
 
     def adicionar_despesa(self):
-        Despesas.incluir(self.id_categoria, self.campo_descricao.value, self.campo_valor.value, self.campo_data.value, self.username)
+        Despesas.incluir(self.id_categoria, self.campo_descricao.value, self.campo_valor.value, self.data.value, self.username)
