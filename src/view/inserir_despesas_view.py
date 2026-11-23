@@ -9,7 +9,7 @@ class DespesaInserirView(ft.View):
         super().__init__()
 
         self.pagina = pagina
-        self.route = "/despesas"
+        self.route = "/cadastrodespesas"
 
         self.width = 800
         self.height = 600
@@ -22,35 +22,32 @@ class DespesaInserirView(ft.View):
         self.username = self.dados_usuario.get("login")
         categorias = Categoria.recuperar_todos(self.username)
 
-        lista_categorias = []
+        opcoes = []
         for categoria in categorias:
-            lista_categorias.append(ft.DropdownOption(key=categoria.get("nome_categoria")))
+            opcoes.append(ft.DropdownOption(key=categoria.get("id_categoria"), text=categoria.get("nome_categoria")))
 
-
-
-
-        # código da tela
+        
+        ### código da tela ###
         titulo = ft.Text(value="Inserir Despesa",
                         color="#CFEEE6",
                         size=30)
         
-        self.dropdown = ft.Dropdown(label="Selecione uma categoria", align=self.horizontal_alignment,
-                                    options=[
-                                        lista_categorias
-                                    ])
         
         self.campo_descricao = ft.TextField(label="Descrição", color="#CFEEE6")
 
         self.campo_valor = ft.TextField(label="Valor da despesa", color="#CFEEE6", keyboard_type=ft.KeyboardType.NUMBER)
 
-        # self.campo_data = ft.TextField(label="data da despesa", color="#CFEEE6", keyboard_type=ft.KeyboardType.DATETIME)
+        self.campo_data = ft.TextField(label="data da despesa", color="#CFEEE6", keyboard_type=ft.KeyboardType.DATETIME)
 
-        self.campo_data = ft.DatePicker()
+        self.campo_categoria = ft.Dropdown(color="#CFEEE6" ,options=
+            opcoes)
 
         botao_cadastrar = ft.Button(icon=ft.Icons.ADD, bgcolor="#28C39D", color="#CFEEE6")
 
-        self.controls = [titulo, self.campo_descricao, self.campo_valor, self.campo_data,botao_cadastrar, ]
-        ###
 
-        def adicionar_despesa(self):
-            Despesas.incluir(categoria.get("id_categoria"), self.campo_descricao.value, self.campo_valor.value)
+
+        self.controls = [titulo, self.campo_descricao, self.campo_valor, self.campo_data, self.campo_categoria, botao_cadastrar]
+        ### / ####
+
+        # def adicionar_despesa(self):
+        #     Despesas.incluir(, self.campo_descricao.value, self.campo_valor.value)
