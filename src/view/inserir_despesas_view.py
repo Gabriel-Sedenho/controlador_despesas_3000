@@ -42,7 +42,9 @@ class DespesaInserirView(ft.View):
         # Criando um datepicker para não ter que escrever a data
         self.data = ft.DatePicker()
         # Botão para ativar o datapicker
-        self.campo_data = ft.Button(icon=ft.Icons.CALENDAR_MONTH, on_click=lambda _:pagina.show_dialog(self.data), bgcolor="#0F7A62", color="#CFEEE6", width=300)
+        self.campo_data = ft.Button(icon=ft.Icons.CALENDAR_MONTH, on_click=lambda _:pagina.show_dialog(self.data), bgcolor="#0F7A62", color="#CFEEE6", width=300, 
+                                    style=ft.ButtonStyle(shape=ft.RoundedRectangleBorder(radius=5))
+                        )
 
         self.campo_categoria = ft.Dropdown(color="#CFEEE6" ,options=opcoes, width=300)
 
