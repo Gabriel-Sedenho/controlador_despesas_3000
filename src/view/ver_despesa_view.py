@@ -14,16 +14,16 @@ class DespesaMostrarView(ft.View):
         self.height = 600
         self.title = "Controlador Despesas 3000"
         self.bgcolor = "#0D0E10"
-        self.vertical_alignment = "center"
+        self.vertical_alignment = "top"
         self.horizontal_alignment = "center"
 
+
         titulo = ft.Text(value="Despesas",
-                        color="#505ab4",
+                        color="#CFEEE6",
                         size=30)
 
-        self.dados_usuario = pagina.session.store.get("usuario_logado")
-        self.username = self.dados_usuario.get("login")
 
         
 
         self.controls = [titulo]
+
