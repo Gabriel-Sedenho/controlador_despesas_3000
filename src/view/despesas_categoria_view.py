@@ -21,44 +21,48 @@ class DespesaCategoriaView(ft.View):
 
         self.dados_usuario = pagina.session.store.get("usuario_logado")
         self.username = self.dados_usuario.get("login")
+        categorias = Categoria.recuperar_todos(self.username)
 
         self.lista_despesas = []
-        
+        opcoes = []
+        for categoria in categorias:
+            self.id_categoria = categoria.get("id_categoria")
+            nome_categoria = categoria.get("nome_categoria")
+            opcoes.append(ft.DropdownOption(key=self.id_categoria, text=nome_categoria))
+
         titulo = ft.Text(value="Despesas por categoria",
                         color="#CFEEE6",
                         size=30)
 
-        botao_ver_todos = ft.Button(icon=ft.Icons.UPDATE, bgcolor="#28C39D", color="#CFEEE6", on_click=self.ver_despesas)
 
 
+        self.campo_categoria = ft.Dropdown(color="#CFEEE6" ,options=opcoes, width=300, on_select=self.ver_despesas_por_categoria)
 
         tabela = ft.DataTable(columns=[ft.DataColumn(label="id_despesa"),
                                        ft.DataColumn(label="Descrição"),
                                        ft.DataColumn(label="Valor"),
-                                       ft.DataColumn(label="Categoria"),
                                        ft.DataColumn(label="Data"),
                                        ft.DataColumn(label="Excluir"),
                                        ], rows=self.lista_despesas, heading_row_color="#28C39D")
+        
 
-        self.controls = [titulo, botao_ver_todos, tabela]
+        self.controls = [titulo, self.campo_categoria,tabela]
 
 
 
-    def ver_despesas(self):
+    def ver_despesas_por_categoria(self):
         self.lista_despesas.clear()
-        despesas = Despesas.recuperar_todos(self.username)
+        despesas = Despesas.recuperar_por_categoria(self.username, self.campo_categoria.value)
 
         for despesa in despesas:
             id_despesa = despesa.get("id_despesa")
             descricao_despesa = despesa.get("descricao_despesa")
             valor_despesa = despesa.get("valor")
-            categoria = despesa.get("nome_categoria")
             data = despesa.get("dt_cadastro")
 
             dados_despesa = ft.DataRow(cells=[ft.DataCell(content=f"{id_despesa}"),
                               ft.DataCell(content=f"{descricao_despesa}"),
                               ft.DataCell(content=f"{valor_despesa}"),
-                              ft.DataCell(content=f"{categoria}"),
                               ft.DataCell(content=f"{data}"),
                               ft.DataCell(ft.Button(icon=ft.Icons.DELETE, bgcolor="#28C39D", color="#CFEEE6", key=despesa.get("id_despesa"), on_click=self.excluir))
                               ], color="#CFEEE6")
@@ -69,4 +73,4 @@ class DespesaCategoriaView(ft.View):
     def excluir(self, e):
         id_despesa = e.control.key
         Despesas.excluir(id_despesa)
-        self.ver_despesas()
+        self.ver_despesas_por_categoria()
