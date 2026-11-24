@@ -33,7 +33,15 @@ class Despesas:
             return None
         
         try:
-            cursor.execute("select * from tb_despesas where login = %s",
+            cursor.execute("""select id_despesa,
+                                 tb_despesas.login, 
+                                 valor, dt_cadastro, 
+                                 descricao_despesa, 
+                                 tb_despesas.id_categoria, 
+                                 tb_categorias.nome_categoria 
+                                from tb_despesas
+                                inner join tb_categorias on tb_categorias.id_categoria = tb_despesas.id_categoria
+                                where tb_despesas.login = %s;""",
                            [login])
             resultado = cursor.fetchall()
             conexao.commit()

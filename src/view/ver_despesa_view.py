@@ -51,7 +51,7 @@ class DespesaMostrarView(ft.View):
             id_despesa = despesa.get("id_despesa")
             descricao_despesa = despesa.get("descricao_despesa")
             valor_despesa = despesa.get("valor")
-            categoria = despesa.get("id_categoria")
+            categoria = despesa.get("nome_categoria")
             data = despesa.get("dt_cadastro")
 
             dados_despesa = ft.DataRow(cells=[ft.DataCell(content=f"{id_despesa}"),
@@ -61,7 +61,6 @@ class DespesaMostrarView(ft.View):
                               ft.DataCell(content=f"{data}"),
                               ft.DataCell(ft.Button(icon=ft.Icons.DELETE, bgcolor="#28C39D", color="#CFEEE6", key=despesa.get("id_despesa"), on_click=self.excluir))
                               ], color="#CFEEE6")
-            
             
             self.lista_despesas.append(dados_despesa)
         self.pagina.update()
