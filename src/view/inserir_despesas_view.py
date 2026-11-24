@@ -12,7 +12,7 @@ class DespesaInserirView(ft.View):
         self.route = "/cadastrodespesas"
 
         self.width = 800
-        self.height = 600
+        self.height = 800
         self.title = "Controlador Despesas 3000"
         self.bgcolor = "#0D0E10"
         self.vertical_alignment = "center"
@@ -57,3 +57,5 @@ class DespesaInserirView(ft.View):
 
     def adicionar_despesa(self):
         Despesas.incluir(self.id_categoria, self.campo_descricao.value, self.campo_valor.value, self.data.value, self.username)
+        self.pagina.show_dialog(ft.SnackBar(content="Despesa Inserida com sucesso!!"))
+

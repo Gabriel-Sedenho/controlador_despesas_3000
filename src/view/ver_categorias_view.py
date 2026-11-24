@@ -12,7 +12,7 @@ class CategoriaView(ft.View):
         self.route = "/categorias"
 
         self.width = 800
-        self.height = 600
+        self.height = 800
         self.title = "Controlador Despesas 3000"
         self.bgcolor = "#0D0E10"
         self.vertical_alignment = "top"

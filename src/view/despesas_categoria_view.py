@@ -10,7 +10,7 @@ class DespesaCategoriaView(ft.View):
         self.route = "/despesascategoria"
 
         self.width = 800
-        self.height = 600
+        self.height = 800
         self.title = "Controlador Despesas 3000"
         self.bgcolor = "#ffffff"
         self.vertical_alignment = "center"
