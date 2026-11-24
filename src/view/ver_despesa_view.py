@@ -27,10 +27,10 @@ class DespesaMostrarView(ft.View):
                         color="#CFEEE6",
                         size=30)
 
-        botao_ver_todos = ft.Button(content="ver todas as despesas", on_click=self.ver_despesas)
+        botao_ver_todos = ft.Button(icon=ft.Icons.UPDATE, bgcolor="#28C39D", color="#CFEEE6", on_click=self.ver_despesas)
 
 
-        tabela = ft.DataTable(columns=[ft.DataColumn(label="id_descrição"),
+        tabela = ft.DataTable(columns=[ft.DataColumn(label="id_despesa"),
                                        ft.DataColumn(label="Descrição"),
                                        ft.DataColumn(label="Valor"),
                                        ft.DataColumn(label="Categoria"),
@@ -42,6 +42,7 @@ class DespesaMostrarView(ft.View):
 
 
     def ver_despesas(self):
+        self.lista_despesas.clear()
         despesas = Despesas.recuperar_todos(self.username)
 
         for despesa in despesas:
@@ -59,4 +60,4 @@ class DespesaMostrarView(ft.View):
                               ], color="#CFEEE6")
             
             self.lista_despesas.append(dados_despesa)
-            self.pagina.update()
+        self.pagina.update()
