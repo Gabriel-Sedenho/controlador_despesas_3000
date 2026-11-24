@@ -30,11 +30,13 @@ class DespesaMostrarView(ft.View):
         botao_ver_todos = ft.Button(icon=ft.Icons.UPDATE, bgcolor="#28C39D", color="#CFEEE6", on_click=self.ver_despesas)
 
 
+
         tabela = ft.DataTable(columns=[ft.DataColumn(label="id_despesa"),
                                        ft.DataColumn(label="Descrição"),
                                        ft.DataColumn(label="Valor"),
                                        ft.DataColumn(label="Categoria"),
                                        ft.DataColumn(label="Data"),
+                                       ft.DataColumn(label="Excluir"),
                                        ], rows=self.lista_despesas, heading_row_color="#28C39D")
 
         self.controls = [titulo, botao_ver_todos, tabela]
@@ -56,8 +58,15 @@ class DespesaMostrarView(ft.View):
                               ft.DataCell(content=f"{descricao_despesa}"),
                               ft.DataCell(content=f"{valor_despesa}"),
                               ft.DataCell(content=f"{categoria}"),
-                              ft.DataCell(content=f"{data}")
+                              ft.DataCell(content=f"{data}"),
+                              ft.DataCell(ft.Button(icon=ft.Icons.DELETE, bgcolor="#28C39D", color="#CFEEE6", key=despesa.get("id_despesa"), on_click=self.excluir))
                               ], color="#CFEEE6")
+            
             
             self.lista_despesas.append(dados_despesa)
         self.pagina.update()
+
+    def excluir(self, e):
+        id_despesa = e.control.key
+        Despesas.excluir(id_despesa)
+        self.ver_despesas()
