@@ -2,6 +2,7 @@ import flet as ft
 
 from src.model.usuario_model import Usuario
 from src.model.despesa_model import Despesas
+from src.model.categoria_model import Categoria
 
 class DespesaMostrarView(ft.View):
     def __init__(self, pagina:ft.Page):
@@ -21,38 +22,41 @@ class DespesaMostrarView(ft.View):
         self.username = self.dados_usuario.get("login")
 
         self.lista_despesas = []
-
+        
         titulo = ft.Text(value="Despesas",
                         color="#CFEEE6",
                         size=30)
 
-        botao_ver_todos = ft.Button(content="ver todas as despesas", on_click=self.atualizar_todas)
+        botao_ver_todos = ft.Button(content="ver todas as despesas", on_click=self.ver_despesas)
 
-        coluna = ft.Column(controls=self.lista_despesas)
 
-        tabela = ft.DataTable(columns=[ft.DataColumn(label=)])
+        tabela = ft.DataTable(columns=[ft.DataColumn(label="id_descrição"),
+                                       ft.DataColumn(label="Descrição"),
+                                       ft.DataColumn(label="Valor"),
+                                       ft.DataColumn(label="Categoria"),
+                                       ft.DataColumn(label="Data"),
+                                       ], rows=self.lista_despesas, heading_row_color="#28C39D")
 
-        self.controls = [titulo, botao_ver_todos, coluna]
+        self.controls = [titulo, botao_ver_todos, tabela]
 
-    def atualizar_todas(self):
-        self.lista_despesas.clear()
+
+
+    def ver_despesas(self):
         despesas = Despesas.recuperar_todos(self.username)
 
         for despesa in despesas:
-            despesa_mostrada = despesa.get("descricao_despesa")
-            nome_despesa = ft.Text(value=despesa_mostrada, color="#CFEEE6")
-            
-            botao = ft.Button(icon=ft.Icons.DELETE, bgcolor="#28C39D", color="#CFEEE6", key=despesa.get("id_despesa"), on_click=self.excluir)
-            linha = ft.Row(controls=[nome_despesa, botao])
-            
-            self.lista_despesas.append(linha)
+            id_despesa = despesa.get("id_despesa")
+            descricao_despesa = despesa.get("descricao_despesa")
+            valor_despesa = despesa.get("valor")
+            categoria = despesa.get("id_categoria")
+            data = despesa.get("dt_cadastro")
 
+            dados_despesa = ft.DataRow(cells=[ft.DataCell(content=f"{id_despesa}"),
+                              ft.DataCell(content=f"{descricao_despesa}"),
+                              ft.DataCell(content=f"{valor_despesa}"),
+                              ft.DataCell(content=f"{categoria}"),
+                              ft.DataCell(content=f"{data}")
+                              ], color="#CFEEE6")
+            
+            self.lista_despesas.append(dados_despesa)
             self.pagina.update()
-        
-        self.pagina.update()
-
-    def excluir(self, e):
-        self.lista_despesas.clear()
-        id_despesa = e.control.key
-        Despesas.excluir(id_despesa)
-        self.atualizar_todas
